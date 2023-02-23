@@ -7,7 +7,7 @@ DBNAME = 'timber.db'
 con = sqlite3.connect(DBNAME)
 cur = con.cursor()
 
-cur.execute("CREATE TABLE timbercut4u(speciesid,species,width,thickness,length,price)")
+cur.execute("CREATE TABLE timbercut4u(date,speciesid,species,width,thickness,length,price)")
 
 ## commit & close DB connection
 con.commit()

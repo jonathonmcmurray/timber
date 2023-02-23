@@ -1,5 +1,6 @@
 import timbercut4u as tb
 import sqlite3
+from datetime import date
 
 DBNAME = 'timber.db'
 
@@ -21,8 +22,10 @@ for speciesid in tb.idtospec:
     r = [tb.getprice(speciesid,x,y) for x in tb.widths for y in tb.thicknesses]
     # add species name to each price dict
     r = [x|{'species_name':tb.idtospec[speciesid]} for x in r]
+    # add date to each price dict
+    r = [x|{'date':date.today()} for x in r]
     print(f"Writing to db for {speciesid} : {r[0]['species_name']}")
-    cur.executemany("INSERT INTO timbercut4u VALUES(:species,:species_name,:width,:thickness,:length,:price)",
+    cur.executemany("INSERT INTO timbercut4u VALUES(:date,:species,:species_name,:width,:thickness,:length,:price)",
                     r)
     
 # delete any null prices
