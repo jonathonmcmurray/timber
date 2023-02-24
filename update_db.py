@@ -17,14 +17,19 @@ cur = con.cursor()
 tb.make_helpers()
 # iterate over each species & get all the prices, write to DB
 for speciesid in tb.idtospec:
-    print(f"Getting prices for {speciesid}")
-    # get prices for each combination of width & thickness
-    r = [tb.getprice(speciesid,x,y) for x in tb.widths for y in tb.thicknesses]
-    # add species name to each price dict
-    r = [x|{'species_name':tb.idtospec[speciesid]} for x in r]
-    # add date to each price dict
-    r = [x|{'date':date.today()} for x in r]
-    print(f"Writing to db for {speciesid} : {r[0]['species_name']}")
+    species = tb.idtospec[speciesid]
+    print(f"Getting prices for {species} (ID: {speciesid})")
+    # get list of all dimensions we want to request prices for
+    d = [[x,y] for x in tb.widths for y in tb.thicknesses]
+    # empty list to store price dictionaries
+    r = []
+    # get prices for each combination of width & thickness, updating progress bar
+    for w,t in d:
+        # get price, add species name & date
+        a = tb.getprice(speciesid,w,t)|{'species_name':species,'date':date.today()}
+        # append dict for this dimension to the list
+        r.append(a)
+    print(f"Writing to db for {species} (ID: {speciesid})")
     cur.executemany("INSERT INTO timbercut4u VALUES(:date,:species,:species_name,:width,:thickness,:length,:price)",
                     r)
     
