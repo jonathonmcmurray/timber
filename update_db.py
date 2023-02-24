@@ -1,6 +1,7 @@
 import timbercut4u as tb
 import sqlite3
 from datetime import date
+from proglog import default_bar_logger
 
 DBNAME = 'timber.db'
 
@@ -23,8 +24,10 @@ for speciesid in tb.idtospec:
     d = [[x,y] for x in tb.widths for y in tb.thicknesses]
     # empty list to store price dictionaries
     r = []
+    # init proglog progress bar
+    logger = default_bar_logger('bar')
     # get prices for each combination of width & thickness, updating progress bar
-    for w,t in d:
+    for w,t in logger.iter_bar(dimension=d):
         # get price, add species name & date
         a = tb.getprice(speciesid,w,t)|{'species_name':species,'date':date.today()}
         # append dict for this dimension to the list
