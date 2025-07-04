@@ -6,7 +6,7 @@ database.
 ## Requirements
 
 * Python 3.11
-* Pipenv
+* Pipenv (optional)
 
 ## Setup
 
@@ -15,6 +15,15 @@ Clone repo and run
 ```bash
 $ cd timber/
 $ pipenv install --python python3.11
+```
+
+or (without pipenv)
+
+```bash
+$ cd timber/
+$ python3 -m venv venv
+$ source ./venv/bin/activate
+$ pip install -r requirements.txt
 ```
 
 ## Instructions

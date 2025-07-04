@@ -1,0 +1,31 @@
+[project]
+name = "timber"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+readme = "README.md"
+dependencies = [
+    "beautifulsoup4>=4.13.4",
+    "certifi>=2025.6.15",
+    "charset-normalizer>=3.4.2",
+    "idna>=3.10",
+    "lxml>=5.4.0",
+    "numpy>=2.3.1",
+    "pandas>=2.3.0",
+    "python-dateutil>=2.9.0.post0",
+    "pytz>=2025.2",
+    "requests>=2.32.4",
+    "six>=1.17.0",
+    "soupsieve>=2.7",
+    "urllib3>=2.5.0",
+]
+
+[dependency-groups]
+dev = []
+
+[tool.uv]
+package = false
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"
