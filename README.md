@@ -33,3 +33,10 @@ $ pip install -r requirements.txt
 
 `timbercut4u.py` can also be imported to provide some functions for downloading prices.
 
+## Scheduling db update
+
+Can schedule db update via cron e.g.
+
+```bash
+30 5 * * 6 cd ~/git/timber && ~/.local/bin/pipenv run python update_db.py >>update_log.txt 2>&1
+```
